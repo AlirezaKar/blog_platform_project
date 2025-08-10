@@ -1,0 +1,33 @@
+{% extends 'base/base.html' %}
+{% block title %} Posts {% endblock %}
+
+{% block content %}
+<h1 align="center">Post</h1>
+
+<div class="container">
+    {% for post in posts %}
+    <div class="row">
+    <div class="card" style="width: 18rem;">
+        {% for image in post.files.all %}
+            <a href="{{ image.file.url }}"><img src="{{ image.file.url }}" class="card-img-top" alt="image"></a>
+        {% endfor %}
+  <div class="card-body">
+    <h5 class="card-title">{{ post.title }}</h5>
+    <p class="card-text">{{ post.text|slice:"100"|safe }}</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{ post.user }}</li>
+    <li class="list-group-item">{{ post.category }}</li>
+    <!-- <li class="list-group-item">A third item</li> -->
+  </ul>
+  <div class="card-body">
+    <a href="{% url 'post_detail_view' post.id %}" class="card-link">More...</a>
+    <a href="#" class="card-link">Another link</a>
+  </div>
+    </div>
+    </div>
+    <br>
+    <p>----------------------------------------------</p><br>
+    {% endfor %}
+</div>
+{% endblock %}

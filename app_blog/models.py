@@ -14,6 +14,12 @@ class SubCategory(models.Model):
     name = models.CharField(max_length=40, null=True)
     parent_category = models.ForeignKey(to=Category, on_delete=models.CASCADE, null=True)
 
+    def __repr__(self):
+        return self.name
+
+    def __str__(self):
+        return f"{self.parent_category} : {self.name}"
+    
 class Post(models.Model):
     class Status(models.TextChoices):
         REJECTED = 'rejected'
@@ -26,6 +32,7 @@ class Post(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     date_modified = models.DateTimeField(auto_now=True, null=True)
     status = models.CharField(max_length=15, choices=Status.choices, default=Status.PENDING)
+    category = models.ForeignKey(to=SubCategory, on_delete=models.SET_NULL, null=True)
     
     def __repr__(self):
         return self.title
