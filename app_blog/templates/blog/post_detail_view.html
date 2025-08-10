@@ -1,0 +1,20 @@
+{% extends 'base/base.html' %}
+{% block title %} {{ post.title|slice:"10"|safe }} {% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 align="center">{{ post.title }}</h1>
+    
+    {% for image in post.files.all %}
+        <a href="{{ image.file.url }}"><img src="{{ image.file.url }}" alt="image" width="200px" height="200x"></a>
+    {% endfor %}
+    <div class="card-body">
+        <h5 class="card-title">{{ post.title }}</h5><br>
+        <p class="card-text">{{ post.text }}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+    <li class="list-group-item">Post by {{ post.user }}</li>
+    <li class="list-group-item">{{ post.category }}</li>
+  </ul>
+</div>
+{% endblock %}
