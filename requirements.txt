@@ -1,2 +1,2 @@
-Djnago==5.2.5
+Django==5.2.5
 psycopg==3.2.9

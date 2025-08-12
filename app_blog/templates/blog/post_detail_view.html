@@ -1,5 +1,5 @@
 {% extends 'base/base.html' %}
-{% block title %} {{ post.title|slice:"10"|safe }} {% endblock %}
+{% block title %} {{ post.title|safe }} {% endblock %}
 
 {% block content %}
 <div class="container">
@@ -16,5 +16,27 @@
     <li class="list-group-item">Post by {{ post.user }}</li>
     <li class="list-group-item">{{ post.category }}</li>
   </ul>
+
+  <br><br><br>
+  <h2 align="left">Comments</h2><br>
+  <div style="background-color: white" class="form-control">
+        <div class="row">
+        <div class="col-8">
+            <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Send">
+            </form>
+        </div>
+        <div class="col-4">
+            {% for comment in comments %}
+            <div class="form-control">
+            <h3 style="text-align: center !important">{{comment.user}}</h3>
+            <p style="text-align: center !important">{{comment.text}}</p>
+            </div><br>
+        {% endfor %}
+        </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
